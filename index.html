@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .chessFrame {
+    display: grid;
+    grid-template-columns: repeat(8, 5em);
+    grid-template-rows: repeat(8, 5em);
+}
+
+.light {
+    background-color: bisque;
+   
+}
+
+.dark {
+    background-color: darkgoldenrod;
+    
+}
+
+.square{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xxx-large;
+}
+
+.chessFrame div {
+    outline: 1px solid black;
+
+}
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        // MODEL
+        const blackPieces = ['&#9820;', '&#9822;', '&#9821;', '&#9819;',
+    '&#9818;', '&#9821;', '&#9822;', '&#9820;']
+
+        const whitePieces = ['&#9814;', '&#9816;', '&#9815;', '&#9813;',
+    '&#9812;', '&#9815;', '&#9816;', '&#9814;']
+
+    const blackPawn = '&#9823;'
+
+    const whitePawn = '&#9817;'
+
+        // VIEW
+        updateView();
+
+        function updateView(){
+            let html = ''
+            
+            for(let row = 0; row < 8; row++){
+                for(let col = 0; col < 8; col++){
+                    let chessPiece = ''
+                    if(row === 0)chessPiece = blackPieces[col];
+                    else if(row === 1) chessPiece = blackPawn;
+                    else if(row === 6) chessPiece = whitePawn;
+                    else if(row === 7) chessPiece = whitePieces[col];
+                    html += ((row +col) & 1) === 0 ? /*HTML*/ `
+                <div  class="light square">${chessPiece ?? ''}</div> 
+                `: 
+                /*HTML*/ `
+                <div class="dark square">${chessPiece ?? ''}</div>
+            `;
+                }
+                
+            }
+            document.getElementById('app').innerHTML = /*HTML*/ `
+            <div class="chessFrame">${html}</div>
+        
+            `;
+        }
+
+        // CONTROLLER
+
+    </script>
+</body>
+</html>
